@@ -1,0 +1,5 @@
+uri: 'http://13.112.58.85/echo/index.html'
+form_data:
+  name: 'taro yamada'
+  age: 30
+
