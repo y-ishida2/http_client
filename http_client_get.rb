@@ -8,22 +8,19 @@ class HttpClient
 
   def get_http(uri, counts)
     uri = create_uri(uri)
-    req = Net::HTTP::Get.new(uri.path)
+    # req = Net::HTTP::Get.new(uri.path)
     threads = []
     counts.times do
       threads << Thread.new do
-        Net::HTTP.start(uri.host, uri.port) do |http|
-          http.request(req)
-        end
+        # res = Net::HTTP.start(uri.host, uri.port) do |http|
+        #   http.request(req)
+        # end
+        # puts res.body
+        res = Net::HTTP.get_response(uri)
+        puts res.body
       end
     end
-    puts threads.size
     threads.each { |thr| thr.join }
-    #counts.times do
-    #  Net::HTTP.start(uri.host, uri.port) do |http|
-    #    http.request(req)
-    #  end
-    #end
     puts "同時に#{counts}回アクセスしました。"
   end
 end
