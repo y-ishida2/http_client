@@ -1,5 +1,4 @@
 require 'net/http'
-require 'uri'
 require 'yaml'
 
 class HttpClient
@@ -22,15 +21,7 @@ class HttpClient
   def http_request
     uri = URI.parse(@uri)
 
-    if @type == 'get'
-      uri.query = URI.encode_www_form(@params)
-      req = Net::HTTP::Get.new(uri)
-    end
-
-    if @type == 'post'
-      req = Net::HTTP::Post.new(uri.path)
-      req.set_form_data(@params)
-    end
+    req = request_type(uri)
 
     threads = []
     @thread_counts.times do
@@ -43,6 +34,22 @@ class HttpClient
     end
     threads.each { |thr| thr.join }
     puts "同時に#{@thread_counts}回アクセスしました。"
+  end
+
+  private
+
+  def request_type(uri)
+    case @type
+    when 'get'
+      uri.query = URI.encode_www_form(@params) unless @params.nil?
+      Net::HTTP::Get.new(uri)
+    when 'post'
+      req = Net::HTTP::Post.new(uri.path)
+      req.set_form_data(@params) unless @params.nil?
+      req
+    else
+      raise 'request_typeが正しくありません。'
+    end
   end
 end
 
