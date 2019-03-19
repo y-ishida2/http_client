@@ -20,7 +20,6 @@ class HttpClient
 
   def http_request
     uri = URI.parse(@uri)
-
     req = request_type(uri)
 
     threads = []
