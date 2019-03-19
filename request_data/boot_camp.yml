@@ -1,6 +1,0 @@
-uri: 'http://13.112.58.85/echo/index.html'
-thread_counts: 5
-form_data:
-  name: 'taro yamada'
-  age: 30
-
