@@ -1,7 +1,0 @@
-uri: 'http://13.112.58.85/echo/index.html'
-thread_counts: 3
-type: post
-params:
-  name: 'yuya ishida'
-  age: 25
-
