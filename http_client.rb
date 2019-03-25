@@ -25,14 +25,12 @@ class HttpClient
     threads = []
     @thread_counts.times do
       threads << Thread.new do
-        res = Net::HTTP.start(uri.host, uri.port) do |http|
+        Net::HTTP.start(uri.host, uri.port) do |http|
           http.request(req)
         end
-        puts res.body
       end
     end
     threads.each { |thr| thr.join }
-    puts "同時に#{@thread_counts}回アクセスしました。"
   end
 
   private
