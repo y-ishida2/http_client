@@ -1,4 +1,5 @@
 /request_data/*
 !/request_data/sample_get_http.yml
 !/request_data/sample_post_http.yml
+!/request_data/template.yml
 
